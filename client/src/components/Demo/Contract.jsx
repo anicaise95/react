@@ -20,13 +20,13 @@ function Contract({ value, textGreeter }) {
 
       let oldies = [];
       oldEvents.forEach(element => {
-        oldies.push(element.returnValues.newValue);
+        oldies.push(element.returnValues._val);
       });
       setOldEvents(oldies);
 
       await contract.events.valueChanged({ fromBlock: "earliest" })
         .on('data', event => {
-          let lastEvent = event.returnValues.newValue;
+          let lastEvent = event.returnValues._val;
           setEventValue(lastEvent);
         })
         .on('changed', changed => console.log(changed))
@@ -35,7 +35,6 @@ function Contract({ value, textGreeter }) {
     })();
 
   }, [contract])
-
 
   return (
     <code>
@@ -73,7 +72,7 @@ function Contract({ value, textGreeter }) {
   }
 }
 
-Event arrivants : `} {eventValue} {`
+Event arrivant : `} {eventValue} {`
 Anciens events : `} {oldEvents}
     </code>
   );

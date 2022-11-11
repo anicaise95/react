@@ -41,10 +41,10 @@ function ContractBtns({ setValue, setTextGreeter }) {
     }
     const newValue = parseInt(inputValue);
     await contract.methods.write(newValue).send({ from: accounts[0] });
+    read();
   };
 
   const setGreet = async e => {
-    console.log(e.target.textGreet);
     if (e.target.tagName === "INPUT") {
       return;
     }
@@ -54,6 +54,7 @@ function ContractBtns({ setValue, setTextGreeter }) {
     }
     const newGreeter = inputGreeter;
     await contract.methods.setGreet(newGreeter).send({ from: accounts[0] });
+    greet();
   };
 
   return (
